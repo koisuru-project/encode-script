@@ -1,0 +1,23 @@
+// Workspace settings override user settings.
+{
+  // "python.languageServer": "None",
+  // "ty.experimental.completions.enable": true,
+  // "ty.importStrategy": "useBundled",
+  // "ty.interpreter": ["/usr/bin//python3.13"],
+  "files.associations": {
+    "*.bookmarks": "plaintext",
+    "*.qp": "plaintext",
+    "*.sed": "shellscript",
+    "*.vpy": "python",
+    "*.ppy": "python"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "python.REPL.sendToNativeREPL": true,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit",
+      "source.organizeImports": "explicit"
+    }
+  }
+}

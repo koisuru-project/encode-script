@@ -1,0 +1,38 @@
+{
+  "configurations": [
+      {
+          "name": "VS Preview Current File",
+          "module": "vspreview",
+          "args": [
+              "${file}"
+          ],
+          "type": "debugpy",
+          "request": "launch",
+          "console": "integratedTerminal",
+          "purpose":["debug-test"],
+          "gevent": false,
+          "justMyCode": false,
+          "logToFile": false,
+          "subProcess": false,
+          "redirectOutput": true,
+          "showReturnValue": false,
+          "suppressMultipleSessionWarning": false
+      },
+      {
+          "name": "Run Current File",
+          "program": "${file}",
+          "type": "debugpy",
+          "request": "launch",
+          "console": "integratedTerminal",
+          "purpose":["debug-test"],
+          "cwd": "${fileDirname}",
+          "gevent": false,
+          "justMyCode": false,
+          "logToFile": false,
+          "subProcess": false,
+          "redirectOutput": true,
+          "showReturnValue": false,
+          "suppressMultipleSessionWarning": false
+      }
+  ]
+}
