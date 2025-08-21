@@ -30,7 +30,7 @@ from vstools import (
     vs,
 )
 
-from cote_common.common_modules_cpu import denoise, handle_lerche_chroma
+from cote_common.common_modules_cpu import bore, denoise, handle_lerche_chroma
 from cote_common.sources import Source
 
 
@@ -45,7 +45,10 @@ class FilterchainResults(BaseModel):
 def filterchain(
     *,
     source: Source,
-    no_descale: FrameRangeN | FrameRangesN,
+    no_descale: FrameRangeN | FrameRangesN = None | None,
+    credits_mask: FrameRangeN | FrameRangesN = None | None,
+    chroma_ignore: FrameRangeN | FrameRangesN = None | None,
+    border_ranges: FrameRangeN | FrameRangesN | None = None,
 ) -> FilterchainResults:
     """
     Main video processing filterchain with multiple source handling and advanced filtering.
@@ -53,6 +56,7 @@ def filterchain(
     # Load source file
     JPBD = src_file(str(source.JPBD), trim=(source.src_cut[0], source.src_cut[1] + 1))
     src = JPBD.init_cut().std.SetFrameProps(source="JPBD")
+    border = bore(src, ranges=border_ranges)
 
     # Native resolution configuration
     native_res = dict(
@@ -62,15 +66,14 @@ def filterchain(
 
     # Rescaling with conditional handling
     rs = Rescale(
-        depth(src, 32),
+        depth(border, 32),
         kernel=Bilinear(),
         upscaler=ArtCNN.R8F64(backend=Backend.OV_CPU(bf16=True)),
-        border_handling=1,
         **native_res,
     )
 
     # Generate masks
-    credits = rs.default_credit_mask(thr=0.216, expand=4, ranges=source.ed)
+    credits = rs.default_credit_mask(thr=0.216, expand=4, ranges=credits_mask)
     rs.default_line_mask()
 
     # Handle no_descale ranges
@@ -84,8 +87,8 @@ def filterchain(
     chroma = handle_lerche_chroma(dns, use_eedi3=True)
 
     # Handle chroma processing for OP sections
-    if hasattr(source, "op") and source.op:
-        chromaign = replace_ranges(chroma, upscaled, source.op)
+    if chroma_ignore:
+        chromaign = replace_ranges(chroma, upscaled, chroma_ignore)
     else:
         chromaign = chroma
 

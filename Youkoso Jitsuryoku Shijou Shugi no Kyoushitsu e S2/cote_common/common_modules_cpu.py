@@ -14,12 +14,26 @@ from vsexprtools import norm_expr
 from vskernels import Point
 from vstools import (
     ChromaLocation,
+    FrameRangeN,
+    FrameRangesN,
     SingleOrArr,
     core,
+    depth,
     join,
+    replace_ranges,
     split,
     vs,
 )
+
+
+def bore(
+    clip: vs.VideoNode,
+    ranges: FrameRangeN | FrameRangesN | None = None,
+) -> vs.VideoNode:
+    clip = depth(clip, 32)
+    border = core.bore.SinglePlane(clip, 1, 1, 1, 1)
+    clip = replace_ranges(clip, border, ranges)
+    return depth(clip, 16)
 
 
 def denoise(
