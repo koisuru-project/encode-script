@@ -85,13 +85,10 @@ def filterchain(
 
     # Denoise with improved settings
     dns = denoise(upscaled, sigma=[0.7, 0.25])
-    chroma = handle_lerche_chroma(dns, use_eedi3=True)
 
-    # Handle chroma processing for OP sections
-    if chroma_ignore:
-        chromaign = replace_ranges(chroma, upscaled, chroma_ignore)
-    else:
-        chromaign = chroma
+    # Handle chroma processing sections
+    chroma = handle_lerche_chroma(dns, use_eedi3=True)
+    chromaign = replace_ranges(chroma, upscaled, chroma_ignore)
 
     # Advanced debanding
     pladeband = placebo_deband(dns, thr=1.5, iterations=16)

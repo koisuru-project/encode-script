@@ -15,7 +15,7 @@ filterchain_results = filterchain(
     border_ranges=BORDER_RANGES,
     no_descale=NO_DESCALE,
     credits_mask=CREDITS_MASK,
-    chroma_ignore=source.op,
+    chroma_ignore=CHORMA_IGNORE,
 )
 
 if not is_preview():
