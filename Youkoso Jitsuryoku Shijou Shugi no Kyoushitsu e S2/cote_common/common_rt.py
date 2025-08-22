@@ -69,7 +69,6 @@ def filterchain(
         depth(border, 32),  # Work in 32-bit for better precision
         kernel=Bilinear(),
         upscaler=ArtCNN.R8F64(backend=BackendV2.TRT(fp16=True)),
-        border_handling=1,
         **native_res,
     )
 
