@@ -193,6 +193,7 @@ rename.py
 !requirements.txt
 !requirements-dev.txt
 !ci.yml
+!reinstall.bat
 
 # Exceptions to the exceptions
 *.lnk
