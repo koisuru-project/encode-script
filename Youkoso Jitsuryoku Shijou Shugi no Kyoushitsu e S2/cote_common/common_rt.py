@@ -45,10 +45,10 @@ class FilterchainResults(BaseModel):
 def filterchain(
     *,
     source: Source,
-    no_descale: FrameRangeN | FrameRangesN = None | None,
-    credits_mask: FrameRangeN | FrameRangesN = None | None,
-    chroma_ignore: FrameRangeN | FrameRangesN = None | None,
-    border_ranges: FrameRangeN | FrameRangesN = None | None,
+    no_descale: FrameRangeN | FrameRangesN,
+    credits_mask: FrameRangeN | FrameRangesN,
+    chroma_ignore: FrameRangeN | FrameRangesN,
+    border_ranges: FrameRangeN | FrameRangesN,
 ) -> FilterchainResults:
     """
     Main video processing filterchain with multiple source handling and advanced filtering.
