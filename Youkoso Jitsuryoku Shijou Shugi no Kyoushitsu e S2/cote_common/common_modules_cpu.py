@@ -26,13 +26,13 @@ from vstools import (
 )
 
 
-def bore(
+def bore_ignore(
     clip: vs.VideoNode,
     ranges: FrameRangeN | FrameRangesN | None = None,
 ) -> vs.VideoNode:
     clip = depth(clip, 32)
     border = core.bore.SinglePlane(clip, 1, 1, 1, 1)
-    clip = replace_ranges(clip, border, ranges)
+    clip = replace_ranges(border, clip, ranges)
     return depth(clip, 16)
 
 

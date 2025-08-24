@@ -30,7 +30,7 @@ from vstools import (
     vs,
 )
 
-from cote_common.common_modules_cpu import bore, denoise, handle_lerche_chroma
+from cote_common.common_modules_cpu import bore_ignore, denoise, handle_lerche_chroma
 from cote_common.sources import Source
 
 
@@ -56,7 +56,7 @@ def filterchain(
     # Load source file
     JPBD = src_file(str(source.JPBD), trim=(source.src_cut[0], source.src_cut[1] + 1))
     src = JPBD.init_cut().std.SetFrameProps(source="JPBD")
-    border = bore(src, ranges=border_ranges)
+    border = bore_ignore(src, ranges=border_ranges)
 
     # Native resolution configuration
     native_res = dict(
@@ -112,6 +112,7 @@ def filterchain(
     # Preview outputs
     if is_preview():
         set_output(src, "src")
+        set_output(border)
         set_output(credits)
         set_output(final, "final")
 
