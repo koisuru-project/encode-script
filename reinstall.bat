@@ -37,20 +37,20 @@ pip install -U git+https://github.com/Jaded-Encoding-Thaumaturgy/vs-adjust
 echo Installing vspyplugin...
 pip install -U git+https://github.com/Jaded-Encoding-Thaumaturgy/vs-pyplugin
 
-@REM :: muxtools
-@REM echo Installing muxtools...
-@REM pip install -U git+https://github.com/Jaded-Encoding-Thaumaturgy/muxtools
+:: muxtools
+echo Installing muxtools...
+pip install -U git+https://github.com/Jaded-Encoding-Thaumaturgy/muxtools
 
-@REM :: vsmuxtools
-@REM echo Installing vsmuxtools...
-@REM pip install -U git+https://github.com/Jaded-Encoding-Thaumaturgy/vs-muxtools
+:: vsmuxtools
+echo Installing vsmuxtools...
+pip install -U git+https://github.com/Jaded-Encoding-Thaumaturgy/vs-muxtools
 
 :: vspreview
 echo Installing vspreview...
 pip install -U git+https://github.com/Jaded-Encoding-Thaumaturgy/vs-preview
 
 :: vsjetpack
-echo Installing jetpytools...
+echo Installing vsjetpack...
 pip install -U git+https://github.com/Jaded-Encoding-Thaumaturgy/vs-jetpack
 
 :: jetpytools
